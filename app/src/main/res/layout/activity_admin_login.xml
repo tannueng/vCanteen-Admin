@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminLoginActivity"
+    android:onClick="hideKb">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_logo"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/adminLogin"
+            android:text="Admin Login"
+            android:layout_below="@+id/logoImage"
+            android:layout_marginTop="52dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/sfprotext_bold"
+            android:textColor="#333333"
+            android:textSize="32sp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="420dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/adminLogin"
+            android:layout_marginTop="32dp"
+            android:id="@+id/emailInputLayout"
+
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:id="@+id/emailInput"
+                android:textColorHint="#E0E0E0"
+                android:textSize="22sp"
+                android:fontFamily="@font/sfprotext_regular"
+                android:inputType="textEmailAddress"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="420dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailInputLayout"
+            android:layout_marginTop="24dp"
+            android:id="@+id/passwordInputLayout"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:id="@+id/passwordInput"
+                android:textColorHint="#E0E0E0"
+                android:textSize="22sp"
+                android:fontFamily="@font/sfprotext_regular"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginButton"
+            android:text="LOGIN"
+            android:background="@drawable/button_pink_rounded_gradient"
+            android:fontFamily="@font/sfprotext_bold"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/passwordInputLayout"
+            android:layout_marginTop="48dp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

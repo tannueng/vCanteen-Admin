@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">vCanteen-Admin</string>
+    <string name="reject_dialog_body">
+
+Vendor [vendorName] will become\ninvisible to every customer in vCanteen and\nunable to receive any orders.\n\nAll in-progress orders will be cancelled.
+</string>
+
+    <string name="approve_dialog_body">
+
+Vendor [vendorName] will be visible\nto every customer in vCanteen and\nbe able to receive orders.
+</string>
+
+
 </resources>

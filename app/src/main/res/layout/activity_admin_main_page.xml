@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminMainPageActivity"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/vendorListLabel"
+        android:text="Vendor List"
+        android:textSize="32sp"
+        android:textColor="@color/colortext333"
+        android:fontFamily="@font/sfprotext_bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="60dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signOutButton"
+        android:text="sign out"
+        android:textSize="16sp"
+        android:textColor="@color/pinkPrimary"
+        android:fontFamily="@font/sfprotext_bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        android:layout_above="@+id/vendorListListView"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/vendorListLabel"
+        android:id="@+id/vendorListListView"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VENDOR \nSTATUS"
+        android:gravity="center"
+        android:layout_above="@id/vendorListListView"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:textSize="10sp"
+        android:textColor="@color/lightgrey"
+        android:layout_marginStart="90dp"
+        android:id="@+id/vendorStatusLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NAME AND EMAIL"
+        android:gravity="center"
+        android:layout_above="@id/vendorListListView"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:textSize="10sp"
+        android:textColor="@color/lightgrey"
+        android:layout_marginStart="250dp"
+        android:id="@+id/nameAndEmailLabel"
+        android:layout_toEndOf="@+id/vendorStatusLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PHONE NUMBER"
+        android:gravity="center"
+        android:layout_above="@id/vendorListListView"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:textSize="10sp"
+        android:textColor="@color/lightgrey"
+        android:layout_marginStart="180dp"
+        android:id="@+id/phoneNumberLabel"
+        android:layout_toEndOf="@+id/nameAndEmailLabel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACCOUNT TYPE"
+        android:gravity="center"
+        android:layout_above="@id/vendorListListView"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/sfprotext_regular"
+        android:textSize="10sp"
+        android:textColor="@color/lightgrey"
+        android:layout_marginStart="90dp"
+        android:id="@+id/accountTypeLabel"
+        android:layout_toEndOf="@+id/phoneNumberLabel"/>
+
+</RelativeLayout>
