@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class VendorListAdapter extends ArrayAdapter {
 
@@ -38,7 +46,10 @@ public class VendorListAdapter extends ArrayAdapter {
     private List<Vendor> mVendorArrayList;
     View customView;
 
-    RequestOptions option = new RequestOptions().centerCrop();;
+    RequestOptions option = new RequestOptions().centerCrop();
+
+
+    String restaurantName;
 
 
     VendorListAdapter(Context context, VendorList List){
@@ -66,6 +77,27 @@ public class VendorListAdapter extends ArrayAdapter {
 
         singleVendor = (Vendor) getItem(position);
 
+        final int vendor_id = singleVendor.getVendorId();
+        final String restaurantName = singleVendor.getRestaurantName();
+        final String status = singleVendor.getVendorAdminPermission();
+
+
+        if(status.equals("APPROVED")){
+            approveButton.setEnabled(false);
+            rejectButton.setEnabled(true);
+            approveButton.setVisibility(View.GONE);
+            rejectButton.setVisibility(View.VISIBLE);
+        } else if(status.equals("REJECTED")){
+            approveButton.setEnabled(true);
+            rejectButton.setEnabled(false);
+            approveButton.setVisibility(View.VISIBLE);
+            rejectButton.setVisibility(View.GONE);
+        } else {
+            approveButton.setEnabled(true);
+            rejectButton.setEnabled(true);
+            approveButton.setVisibility(View.VISIBLE);
+            rejectButton.setVisibility(View.VISIBLE);
+        }
 
 
         //Putting everything into list item
@@ -93,10 +125,10 @@ public class VendorListAdapter extends ArrayAdapter {
 
 
             //Parse vendorId from JSON into placeholder
-            vendorIdContainer.setText(String.valueOf(singleVendor.getVendorId()));
+            vendorIdContainer.setText(String.valueOf(vendor_id));
 
             //Parse vendor image URL into placeholder using Glide
-            //Glide.with(this.getContext()).load(singleVendor.getVendorImage()).apply(option).into(vendorProfileImage);
+            Glide.with(this.getContext()).load(singleVendor.getVendorImage()).apply(option).into(vendorProfileImage);
 
             vendorName.setText(singleVendor.getRestaurantName());
             vendorEmail.setText(singleVendor.getVendorEmail());
@@ -143,8 +175,8 @@ public class VendorListAdapter extends ArrayAdapter {
 
                 String contentText = content.getText().toString();
                 if (singleVendor.getRestaurantName() != null){
-                    String contentWithVendorName = contentText.replace("[vendorName]", singleVendor.getRestaurantName());
-                    content.setText(contentWithVendorName);
+                    String contentWithVendorName = contentText.replace("[vendorName]", "<b>"+restaurantName+"</b>");
+                    content.setText(Html.fromHtml(contentWithVendorName));
                 }
 
 
@@ -164,6 +196,7 @@ public class VendorListAdapter extends ArrayAdapter {
                         positiveButton.setEnabled(false);
 
                         //deleteThisMenu();
+                        changeVendorPermission(vendor_id,"APPROVED");
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -172,13 +205,14 @@ public class VendorListAdapter extends ArrayAdapter {
                                 Toast.makeText(getContext(), "Saved!",  Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), AdminMainPageActivity.class);
                                 getContext().startActivity(intent);
-                                positiveButton.setEnabled(true);
 
+                                positiveButton.setEnabled(true);
+                                dialog.dismiss();
                             }
-                        }, 3000);
+                        }, 2000);
 
                         //Toast.makeText(getApplicationContext(), "MENU DELETED!",  Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+
 
                     }
                 });
@@ -204,8 +238,8 @@ public class VendorListAdapter extends ArrayAdapter {
 
                 String contentText = content.getText().toString();
                 if (singleVendor.getRestaurantName() != null){
-                    String contentWithVendorName = contentText.replace("[vendorName]", singleVendor.getRestaurantName());
-                    content.setText(contentWithVendorName);
+                    String contentWithVendorName = contentText.replace("[vendorName]", "<b>"+restaurantName+"</b>");
+                    content.setText(Html.fromHtml(contentWithVendorName));
                 }
 
 
@@ -225,6 +259,9 @@ public class VendorListAdapter extends ArrayAdapter {
                         positiveButton.setEnabled(false);
 
                         //deleteThisMenu();
+                        changeVendorPermission(vendor_id,"REJECTED");
+
+
 
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -233,13 +270,14 @@ public class VendorListAdapter extends ArrayAdapter {
                                 Toast.makeText(getContext(), "Saved!",  Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getContext(), AdminMainPageActivity.class);
                                 getContext().startActivity(intent);
-                                positiveButton.setEnabled(true);
 
+                                positiveButton.setEnabled(true);
+                                dialog.dismiss();
                             }
-                        }, 3000);
+                        }, 2000);
 
                         //Toast.makeText(getApplicationContext(), "MENU DELETED!",  Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+
 
                     }
                 });
@@ -252,6 +290,108 @@ public class VendorListAdapter extends ArrayAdapter {
 
 
         return customView;
+    }
+
+    private void changeVendorPermission(final int vendor_id, final String permission) {
+
+        String url="https://vcanteen.herokuapp.com/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        VendorChange vendorChange = new VendorChange(vendor_id,permission);
+        System.out.println("==================== SENT Vendor change: "+vendorChange.toString()+" ==================");
+
+        Call<List<ChangePermissionResponse>> call = jsonPlaceHolderApi.setVendorPermission(vendorChange); //SET LOGIC TO INSERT ID HERE
+        System.out.println("==================== SENT Vendor id: "+vendor_id+"- Permission: "+permission +" ==================");
+
+
+        call.enqueue(new Callback<List<ChangePermissionResponse>>() {
+            @Override
+            public void onResponse(Call<List<ChangePermissionResponse>> call, Response<List<ChangePermissionResponse>> response) {
+
+                if (!response.isSuccessful()) {
+                    System.out.println("\n\n\n\n********************"+ "Code: " + response.code() +"********************\n\n\n\n");
+
+                    Toast.makeText(getContext(), "Code: " + response.code(),  Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                List<ChangePermissionResponse> changePermissionResponse = response.body();
+                System.out.println("\n\n\n\n********************"+ " RESPONSE:: "+ changePermissionResponse.get(0).getVendorStatus() +" ********************\n\n\n\n");
+                System.out.println("\n\n\n\n********************"+ " Vendor Permission Changed "+"********************\n\n\n\n");
+
+                if(permission.equals("REJECTED")) {
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            System.out.println("\n\n\n\n********************"+ " begin cancel order "+"********************\n\n\n\n");
+                            cancelAllCookingOrders(vendor_id);
+
+                        }
+                    }, 2000);
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ChangePermissionResponse>> call, Throwable t) {
+                System.out.println("\n\n\n\n******************** FAIL: "+ t.getMessage() +"********************\n\n\n\n");
+
+
+            }
+        });
+
+    }
+
+
+    private void cancelAllCookingOrders(final int vendor_id) {
+
+        String url = "https://vcanteen.herokuapp.com/";
+        String reason = "The vendor is temporarily blocked from the system.";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Call<Void> call = jsonPlaceHolderApi.cancelAllOrder(vendor_id,reason);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if (!response.isSuccessful()) {
+                    //vendorNameInput.setText("Code: " + response.code());
+                    System.out.println("\n\n\n\n********************" + "Code: " + response.code() + "********************\n\n\n\n");
+                    return;
+                }
+
+                System.out.println("\n\n\n\n********************"+ " ALL COOKING of vendor id "+ vendor_id +"********************\n\n\n\n");
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                //vendorProfile.setText(t.getMessage());
+                System.out.println("\n\n\n\n********************" + t.getMessage() + "********************\n\n\n\n");
+
+
+            }
+        });
+
     }
 
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:padding="48dp"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +12,8 @@
         android:id="@+id/dialogTitle"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Reject Vendor"
+        android:text="Log out of
+vCanteen Admin?"
         android:gravity="center"
 
         android:textSize="24sp"
@@ -20,20 +21,7 @@
         android:textColor="@color/colortext333"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/dialogContent"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:text="Vendor - [vendorName] - will become \ninvisible to every customer in vCanteen and\nunable to receive any orders.\n\nAll in-progress orders will be cancelled."
-        android:gravity="center"
 
-        android:lineSpacingExtra="5sp"
-        android:textSize="22sp"
-        android:fontFamily="@font/sfprotext_regular"
-        android:textColor="@color/colortext333"
-        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,7 +38,7 @@
             android:paddingVertical="16dp"
             android:paddingHorizontal="24dp"
             android:background="@android:color/transparent"
-            android:text="CANCEL"
+            android:text="STAY"
             android:layout_marginHorizontal="8dp"
             android:fontFamily="@font/sfprotext_bold"
             android:textSize="16sp"
@@ -64,8 +52,8 @@
             android:paddingVertical="16dp"
             android:paddingHorizontal="24dp"
             android:layout_marginHorizontal="8dp"
-            android:background="@drawable/button_red"
-            android:text="REJECT"
+            android:background="@drawable/button_pink_gradient"
+            android:text="LOG OUT"
 
             android:fontFamily="@font/sfprotext_bold"
             android:textSize="16sp"

@@ -19,12 +19,38 @@
         android:layout_marginStart="48dp"
         android:layout_marginBottom="60dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logInAs"
+        android:text="Hello Admin, "
+        android:layout_toStartOf="@id/adminEmailText"
+        android:layout_alignBaseline="@+id/signOutButton"
+        android:textSize="18sp"
+        android:textColor="@color/lightgrey"
+        android:fontFamily="@font/sfprotext_regularitalic"
+        android:gravity="end"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/adminEmailText"
+        android:text="admin@vcanteen.co"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/signOutButton"
+        android:layout_marginStart="2dp"
+        android:textColor="#4F4F4F"
+        android:fontFamily="@font/sfprotext_semibold"
+        android:layout_toStartOf="@+id/signOutButton"
+        android:gravity="end"
+        android:layout_marginEnd="48dp"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/signOutButton"
         android:text="sign out"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textColor="@color/pinkPrimary"
         android:fontFamily="@font/sfprotext_bold"
         android:layout_marginTop="32dp"
@@ -58,7 +84,7 @@
         android:fontFamily="@font/sfprotext_regular"
         android:textSize="10sp"
         android:textColor="@color/lightgrey"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="50dp"
         android:id="@+id/vendorStatusLabel"/>
 
     <TextView
@@ -85,7 +111,7 @@
         android:fontFamily="@font/sfprotext_regular"
         android:textSize="10sp"
         android:textColor="@color/lightgrey"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="210dp"
         android:id="@+id/phoneNumberLabel"
         android:layout_toEndOf="@+id/nameAndEmailLabel"/>
 
@@ -99,7 +125,7 @@
         android:fontFamily="@font/sfprotext_regular"
         android:textSize="10sp"
         android:textColor="@color/lightgrey"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="80dp"
         android:id="@+id/accountTypeLabel"
         android:layout_toEndOf="@+id/phoneNumberLabel"/>
 
