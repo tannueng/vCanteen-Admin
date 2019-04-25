@@ -54,12 +54,13 @@
         android:layout_toEndOf="@+id/idContainer"
         app:srcCompat="@drawable/ic_vendor_default"
         android:layout_marginStart="60dp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        />
 
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_toEndOf="@id/vendorProfileImage"
@@ -71,25 +72,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colortext333"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:fontFamily="@font/sfprotext_bold"
             android:text="Vendor Name"
             android:layout_marginBottom="8dp"
             android:id="@+id/vendorName"
             android:maxLength="40"
             android:singleLine="true"
+            android:maxWidth="310dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colortext333"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:fontFamily="@font/sfprotext_regular"
             android:text="vendormail@mail.com"
             android:id="@+id/vendorEmail"
             android:maxLength="40"
             android:singleLine="true"
+            android:maxWidth="310dp"
             />
 
     </LinearLayout>
@@ -101,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/lightgrey"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:fontFamily="@font/sfprotext_medium"
         android:text="0877091350"
         android:layout_centerVertical="true"
@@ -114,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/lightgrey"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:fontFamily="@font/sfprotext_medium"
         android:text="FACEBOOK"
         android:layout_centerVertical="true"
@@ -135,7 +138,7 @@
         android:fontFamily="@font/sfprotext_bold"
         android:text="PENDING"
         android:textColor="@color/pendingYellow"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:gravity="center"/>
 
     <LinearLayout
@@ -145,15 +148,15 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/buttonsContainer"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="24dp"
         >
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:text="APPROVE"
-            android:textSize="14sp"
-            android:fontFamily="@font/sfprotext_medium"
+            android:textSize="16sp"
+            android:fontFamily="@font/sfprotext_semibold"
             android:textColor="#FFF"
             android:background="@drawable/button_pink_gradient"
             android:layout_marginBottom="12dp"
@@ -161,11 +164,11 @@
             />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:text="reject"
-            android:textSize="14sp"
-            android:fontFamily="@font/sfprotext_medium"
+            android:textSize="16sp"
+            android:fontFamily="@font/sfprotext_semibold"
             android:textColor="@color/pinkPrimary"
             android:background="@drawable/button_pink_stroke"
             android:id="@+id/rejectButton"/>

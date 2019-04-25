@@ -130,6 +130,9 @@ public class VendorListAdapter extends ArrayAdapter {
             //Parse vendor image URL into placeholder using Glide
             Glide.with(this.getContext()).load(singleVendor.getVendorImage()).apply(option).into(vendorProfileImage);
 
+            if(singleVendor.getVendorImage() == null)
+                Glide.with(this.getContext()).load(R.drawable.ic_vendor_default).apply(option).into(vendorProfileImage);
+
             vendorName.setText(singleVendor.getRestaurantName());
             vendorEmail.setText(singleVendor.getVendorEmail());
             phoneNumber.setText(singleVendor.getVendorPhoneNumber());
