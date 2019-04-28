@@ -14,11 +14,14 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -101,6 +104,8 @@ public class AdminLoginActivity extends AppCompatActivity {
                 passwordInputLayout.setError("");
             }
         });
+
+        passwordInput.setOnEditorActionListener(editorListener);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,4 +277,40 @@ public class AdminLoginActivity extends AppCompatActivity {
         backPressedTime = System.currentTimeMillis();
 
     }
+
+    private TextView.OnEditorActionListener editorListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+            if(actionId == EditorInfo.IME_ACTION_DONE){
+                emailInputLayout.setError(null);
+                if (emailInput.getText().toString().equals("")){
+                    emailInputLayout.setError("Please input Email.");
+
+                } else if( !(EMAIL_PATTERN.matcher(emailInput.getText().toString()).matches())){
+                    emailInputLayout.setError("Invalid email. Please try again.");
+
+                } else if (passwordInput.getText().toString().equals("")){
+                    passwordInputLayout.setError("Please input Password.");
+
+                }else if(!PASSWORD_PATTERN.matcher(passwordInput.getText().toString()).matches()) {
+                    passwordInputLayout.setError("Password must be letter, number or these characters _ - * ' \" # & () @");
+                } else{
+
+
+                    email = emailInput.getText().toString();
+                    System.out.println("ADMIN EMAIL" + email);
+                    password = passwordInput.getText().toString();
+                    System.out.println("ADMIN PLAIN PASSWORD" + password);
+
+                    password = new String(Hex.encodeHex(DigestUtils.sha256(password)));
+                    System.out.println("ADMIN HASH PASSWORD" + password);
+
+                    sendLogin(email,password);
+                }
+            }
+
+            return false;
+        }
+    };
 }

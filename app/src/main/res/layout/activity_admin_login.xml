@@ -55,6 +55,7 @@
                 android:textSize="22sp"
                 android:fontFamily="@font/sfprotext_regular"
                 android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
                 />
         </android.support.design.widget.TextInputLayout>
 
@@ -77,7 +78,8 @@
                 android:textColorHint="#E0E0E0"
                 android:textSize="22sp"
                 android:fontFamily="@font/sfprotext_regular"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:imeOptions="actionDone"/>
         </android.support.design.widget.TextInputLayout>
 
 
