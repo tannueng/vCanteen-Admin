@@ -41,9 +41,23 @@
         android:layout_marginStart="2dp"
         android:textColor="#4F4F4F"
         android:fontFamily="@font/sfprotext_semibold"
-        android:layout_toStartOf="@+id/signOutButton"
+        android:layout_toStartOf="@+id/refreshButton"
         android:gravity="end"
         android:layout_marginEnd="48dp"/>
+
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toStartOf="@+id/signOutButton"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/sfprotext_medium"
+        android:text="refresh"
+        android:textColor="@color/pinkPrimary"
+        android:textSize="20sp" />
 
     <Button
         android:layout_width="wrap_content"

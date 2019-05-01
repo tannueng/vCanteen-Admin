@@ -38,6 +38,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
     TextView adminEmailText;
 
     Button signOutButton;
+    Button refreshButton;
     private SharedPreferences sharedPref;
     int admin_id;
     String email;
@@ -50,11 +51,22 @@ public class AdminMainPageActivity extends AppCompatActivity {
         vendorListListView = findViewById(R.id.vendorListListView);
         signOutButton = findViewById(R.id.signOutButton);
         adminEmailText = findViewById(R.id.adminEmailText);
+        refreshButton = findViewById(R.id.refreshButton);
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
         admin_id = sharedPref.getInt("admin_id", 0);
         email = sharedPref.getString("email", "empty email");
         System.out.println("ADMIN TOKEN EMAIL Main page "+sharedPref.getString("email", "empty email"));
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
 
         if (!email.equals("empty email")){
             adminEmailText.setText(email);
@@ -114,6 +126,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         loadAllVendor();
 
     }
+
 
     private void logOut() {
         sharedPref.edit().putString("token", "NO TOKEN").commit();
